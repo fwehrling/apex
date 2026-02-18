@@ -49,26 +49,9 @@ Each phase can also be invoked independently:
 
 ### Agent Delegation
 
-APEX delegates to specialized agents for domain expertise. Each phase automatically selects the right agents based on the feature's scope.
+Each phase instructs Claude to delegate domain-specific work to specialized agents via the Task tool. These agents are **not included in APEX** -- they are Claude Code's built-in subagent types (e.g. `angular-expert`, `nextjs-expert`) or general-purpose agents prompted with a specific role (e.g. `backend-architect`, `security-engineer`).
 
-| Domain | Agent | Purpose |
-|--------|-------|---------|
-| Backend/API | `backend-architect` | API design, database, server-side logic |
-| Frontend/UI | `frontend-architect` | UI components, accessibility, responsive design |
-| Angular | `angular-expert` | Angular 21+, signals, standalone components |
-| Next.js | `nextjs-expert` | Next.js 15+, App Router, Server Components |
-| Security | `security-engineer` | Vulnerability assessment, auth, compliance |
-| Performance | `performance-engineer` | Optimization, bottlenecks, metrics |
-| Testing | `quality-engineer` | Test strategy, edge cases, coverage |
-| Code Quality | `refactoring-expert` | SOLID principles, clean code |
-| System Design | `system-architect` | Architecture decisions, scalability |
-| DevOps | `devops-architect` | CI/CD, deployment, infrastructure |
-| Python | `python-expert` | Python-specific implementation |
-| Documentation | `technical-writer` | API docs, user guides |
-| Requirements | `requirements-analyst` | PRD, user stories, scope |
-| Debugging | `root-cause-analyst` | Complex debugging, investigation |
-| E-commerce | `ecommerce-marketing-expert` | Conversion, UX, marketing, payments |
-| E-commerce Legal | `ecommerce-legal-expert` | Terms of service, GDPR, compliance |
+APEX tells Claude *when* and *how* to delegate. The agents themselves are part of Claude Code.
 
 ### Persistent Artifacts
 
@@ -92,13 +75,7 @@ Phase 2 (Plan) always stops for user approval. Open questions are presented with
 ## Installation
 
 ```bash
-# Copy APEX skills into your project
-cp -r skills/apex* /path/to/your/project/.claude/skills/
-```
-
-Or clone and copy:
-
-```bash
+# Clone the repo and copy skills into your project
 git clone https://github.com/fwehrling/apex.git /tmp/apex
 cp -r /tmp/apex/skills/apex* /path/to/your/project/.claude/skills/
 ```
