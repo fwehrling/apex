@@ -53,6 +53,35 @@ Each phase instructs Claude to delegate domain-specific work to specialized agen
 
 APEX tells Claude *when* and *how* to delegate. The agents themselves are part of Claude Code.
 
+### Agent Teams (Parallel Execution)
+
+When Claude Code's experimental Agent Teams feature is enabled, APEX automatically uses **true parallel execution** instead of sequential subagents whenever 2 or more agents are needed in a phase.
+
+| Phase | Without Agent Teams | With Agent Teams |
+|-------|--------------------|--------------------|
+| Analyze | Sequential subagents | Parallel teammates (architecture, patterns, integration) |
+| Plan | Sequential consultation | Parallel domain experts |
+| Execute | Sequential implementation | Parallel module development |
+| Examine | Sequential reviews | Parallel specialist reviewers |
+
+To enable Agent Teams, set the environment variable:
+
+```bash
+export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
+```
+
+Or add it to your Claude Code settings (`~/.claude/settings.json`):
+
+```json
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  }
+}
+```
+
+Agent Teams requires `tmux` for split pane display. APEX falls back to standard subagents automatically if Agent Teams is unavailable.
+
 ### Persistent Artifacts
 
 Every phase writes its output to a task directory under `.claude/tasks/` (or `tasks/`), creating a traceable record:
@@ -118,6 +147,7 @@ apex/
 ## Requirements
 
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI
+- `tmux` (optional, for Agent Teams split pane display)
 
 ---
 

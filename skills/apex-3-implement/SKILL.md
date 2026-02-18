@@ -129,6 +129,14 @@ Output:
 - Use `general-purpose` with "You are a QA engineer." for test creation
 - Use `general-purpose` with "You are a security engineer." for security-sensitive code
 
+**Agent Teams Acceleration**:
+When `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` is set and implementation involves 2+ independent modules:
+- Create a team with `TeamCreate`, spawn specialist teammates in parallel
+- Each teammate gets: role + implementation plan section + file scope (strict ownership, no overlap)
+- Teammates implement their module and report completion via shared task list
+- Lead integrates results and runs cross-module validation
+- Falls back to sequential subagents if Agent Teams is unavailable
+
 ---
 
 ## French Language Rule
