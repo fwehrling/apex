@@ -200,11 +200,24 @@ Full report: [path to review-report.md]
 | Root Cause | "You are a root cause analyst." | Any issues found during review |
 
 **Review Process**:
-1. Code review: `general-purpose` with "You are a refactoring expert."
-2. Security review: `general-purpose` with "You are a security engineer."
-3. Performance review: `general-purpose` with "You are a performance engineer."
-4. Test review: `general-purpose` with "You are a QA engineer."
-5. Compile all findings into the review report
+1. Identify review areas needed (code quality, security, performance, testing, etc.)
+2. If 2+ agents needed AND `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` is set:
+   - Use Agent Teams for true parallel review (TeamCreate + teammates)
+   - Each teammate gets: role + list of files to review + review criteria + task
+   - Teammates report findings via shared task list
+   - Lead compiles all findings into the review report
+3. Otherwise: use Task tool (subagents) in parallel
+   - For native agents: launch with `subagent_type` directly
+   - For role-based agents: launch with `subagent_type="general-purpose"` and include the role prompt prefix
+4. Compile all findings into the review report
+
+**Agent Teams Acceleration**:
+When `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` is set and 2+ review areas are needed:
+- Create a team with `TeamCreate`, spawn specialist reviewers as teammates
+- Each teammate gets a self-sufficient prompt with role + files to review + criteria
+- Teammates communicate findings via the shared task list
+- Lead integrates all findings into the final review report
+- Falls back to sequential subagents if Agent Teams is unavailable
 
 ---
 

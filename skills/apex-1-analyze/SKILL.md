@@ -129,7 +129,16 @@ After creating the file, output:
 | Performance | "You are a performance engineer." | Performance considerations, bottlenecks |
 | Requirements | "You are a requirements analyst." | Scope clarification, user stories |
 
-**Example Parallel Launch**:
+**Agent Teams Acceleration**:
+When `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` is set and 2+ agents are needed, use Agent Teams instead of subagents for true parallel execution:
+- Create a team with `TeamCreate`
+- Spawn each analysis agent as a teammate with a self-sufficient prompt (role + task + file scope)
+- Teammates communicate results via the shared task list
+- Collect all outputs and integrate into `analysis.md`
+
+If Agent Teams is unavailable, fall back to parallel Task tool calls (subagents).
+
+**Example Parallel Launch (subagents)**:
 ```
 Use Task tool with subagent_type="angular-expert" for Angular analysis
 Use Task tool with subagent_type="general-purpose", prompt="You are a senior backend architect. Analyze..." for API analysis

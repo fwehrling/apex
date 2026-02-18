@@ -166,8 +166,13 @@ After creating the file, output:
 **Planning Process**:
 1. Read the analysis.md
 2. Identify domains involved in the feature
-3. For native agents: launch with `subagent_type` directly
-4. For role-based agents: launch with `subagent_type="general-purpose"` and include the role prompt prefix
+3. If 2+ agents needed AND `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` is set:
+   - Use Agent Teams for true parallel consultation (TeamCreate + teammates)
+   - Each teammate gets a self-sufficient prompt with role + analysis context + task
+   - Collect all recommendations via shared task list
+4. Otherwise: use Task tool (subagents) in parallel
+   - For native agents: launch with `subagent_type` directly
+   - For role-based agents: launch with `subagent_type="general-purpose"` and include the role prompt prefix
 5. Incorporate their expertise into the implementation plan
 
 ---

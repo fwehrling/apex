@@ -115,10 +115,15 @@ For these domains, use `general-purpose` and start the Task prompt with the role
 
 **Delegation Process**:
 1. Identify which domains the feature touches
-2. For native agents: launch with `subagent_type` directly
-3. For role-based agents: launch with `subagent_type="general-purpose"` and include the role prompt prefix
-4. Integrate their outputs into your analysis/plan
-5. For complex features, use multiple agents in parallel
+2. If 2+ agents needed AND `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` is set:
+   - Use Agent Teams: create a team, spawn teammates with self-sufficient prompts
+   - Each teammate gets: role description + task + file scope + quality rules
+   - Coordinate via shared task list, collect results from teammates
+   - This gives true parallel execution with direct inter-agent messaging
+3. Otherwise (1 agent or Agent Teams unavailable):
+   - For native agents: launch with `subagent_type` directly via Task tool
+   - For role-based agents: launch with `subagent_type="general-purpose"` and include the role prompt prefix
+4. Integrate all agent outputs into your analysis/plan
 
 ---
 
