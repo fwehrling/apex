@@ -177,26 +177,33 @@ Full report: [path to review-report.md]
 
 ## Mandatory Agent Delegation for Review
 
-**CRITICAL**: Use specialized agents for comprehensive review:
+**CRITICAL**: Use specialized agents for comprehensive review.
 
-| Review Area | Agent to Use | What They Review |
-|-------------|--------------|------------------|
-| Code Quality | `refactoring-expert` | Clean code, SOLID, maintainability |
+### Native Agents (use directly as `subagent_type`)
+
+| Review Area | subagent_type | What They Review |
+|-------------|---------------|------------------|
 | Angular Code | `angular-expert` | Angular 21+ best practices, signals, patterns |
 | Next.js Code | `nextjs-expert` | Next.js 15+ best practices, App Router patterns |
-| Security | `security-engineer` | Vulnerabilities, OWASP compliance |
-| Performance | `performance-engineer` | Bottlenecks, optimization opportunities |
-| Testing | `quality-engineer` | Test coverage, edge cases |
-| Architecture | `system-architect` | Design patterns, scalability |
-| Root Cause | `root-cause-analyst` | Any issues found during review |
 | E-commerce Code | `ecommerce-marketing-expert` | Conversion best practices, UX optimization |
 | Legal Compliance | `ecommerce-legal-expert` | Terms of service, GDPR, legal notices, regulatory compliance |
 
+### Role-Based Agents (use `subagent_type="general-purpose"` with role prompt)
+
+| Review Area | Role Prompt Prefix | What They Review |
+|-------------|--------------------|------------------|
+| Code Quality | "You are a refactoring expert." | Clean code, SOLID, maintainability |
+| Security | "You are a security engineer." | Vulnerabilities, OWASP compliance |
+| Performance | "You are a performance engineer." | Bottlenecks, optimization opportunities |
+| Testing | "You are a QA engineer." | Test coverage, edge cases |
+| Architecture | "You are a system architect." | Design patterns, scalability |
+| Root Cause | "You are a root cause analyst." | Any issues found during review |
+
 **Review Process**:
-1. Delegate code review to `refactoring-expert`
-2. Security review to `security-engineer`
-3. Performance review to `performance-engineer`
-4. Test review to `quality-engineer`
+1. Code review: `general-purpose` with "You are a refactoring expert."
+2. Security review: `general-purpose` with "You are a security engineer."
+3. Performance review: `general-purpose` with "You are a performance engineer."
+4. Test review: `general-purpose` with "You are a QA engineer."
 5. Compile all findings into the review report
 
 ---

@@ -107,26 +107,33 @@ After creating the file, output:
 
 ## Mandatory Agent Delegation for Analysis
 
-**CRITICAL**: You MUST use specialized agents for thorough analysis. Launch them in parallel using the Task tool:
+**CRITICAL**: You MUST use specialized agents for thorough analysis. Launch them in parallel using the Task tool.
 
-| Analysis Area | Agent to Use | Purpose |
-|---------------|--------------|---------|
-| Backend Analysis | `backend-architect` | API patterns, database design, server architecture |
-| Frontend Analysis | `frontend-architect` | UI patterns, accessibility, component structure |
+### Native Agents (use directly as `subagent_type`)
+
+| Analysis Area | subagent_type | Purpose |
+|---------------|---------------|---------|
 | Angular Apps | `angular-expert` | Angular 21+, signals, standalone components, control flow |
 | Next.js Apps | `nextjs-expert` | Next.js 15+, App Router, Server Components, Server Actions |
-| System Design | `system-architect` | Architecture, scalability, dependencies |
-| Security Review | `security-engineer` | Security implications, vulnerabilities |
-| Performance | `performance-engineer` | Performance considerations, bottlenecks |
-| Requirements | `requirements-analyst` | Scope clarification, user stories |
 | E-commerce Apps | `ecommerce-marketing-expert` | Conversion optimization, UX, marketing strategy |
-| E-commerce Legal | `ecommerce-legal-expert` | Terms of service, GDPR, legal notices, sole proprietorship compliance |
+| E-commerce Legal | `ecommerce-legal-expert` | Terms of service, GDPR, legal notices, compliance |
+
+### Role-Based Agents (use `subagent_type="general-purpose"` with role prompt)
+
+| Analysis Area | Role Prompt Prefix | Purpose |
+|---------------|--------------------|---------|
+| Backend | "You are a senior backend architect." | API patterns, database design, server architecture |
+| Frontend | "You are a senior frontend architect." | UI patterns, accessibility, component structure |
+| System Design | "You are a system architect." | Architecture, scalability, dependencies |
+| Security | "You are a security engineer." | Security implications, vulnerabilities |
+| Performance | "You are a performance engineer." | Performance considerations, bottlenecks |
+| Requirements | "You are a requirements analyst." | Scope clarification, user stories |
 
 **Example Parallel Launch**:
 ```
-Use Task tool with subagent_type="backend-architect" for API analysis
-Use Task tool with subagent_type="frontend-architect" for UI analysis
-Use Task tool with subagent_type="system-architect" for architecture review
+Use Task tool with subagent_type="angular-expert" for Angular analysis
+Use Task tool with subagent_type="general-purpose", prompt="You are a senior backend architect. Analyze..." for API analysis
+Use Task tool with subagent_type="general-purpose", prompt="You are a system architect. Review..." for architecture review
 ```
 
 Integrate all agent outputs into the final `analysis.md`.

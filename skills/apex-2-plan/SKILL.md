@@ -141,26 +141,34 @@ After creating the file, output:
 
 ## Mandatory Agent Delegation for Planning
 
-**CRITICAL**: Consult specialized agents for each domain in the implementation plan:
+**CRITICAL**: Consult specialized agents for each domain in the implementation plan.
 
-| Plan Domain | Agent to Consult | What to Get |
-|-------------|------------------|-------------|
-| API Design | `backend-architect` | API structure, endpoints, error handling |
-| UI Components | `frontend-architect` | Component specs, accessibility requirements |
+### Native Agents (use directly as `subagent_type`)
+
+| Plan Domain | subagent_type | What to Get |
+|-------------|---------------|-------------|
 | Angular Apps | `angular-expert` | Angular 21+ patterns, signals, standalone components |
 | Next.js Apps | `nextjs-expert` | Next.js 15+ patterns, App Router, Server Components |
-| Architecture | `system-architect` | Architecture decisions, patterns to follow |
-| Testing | `quality-engineer` | Test strategy, edge cases, coverage requirements |
-| Security | `security-engineer` | Security requirements, validation rules |
-| Performance | `performance-engineer` | Performance targets, optimization strategies |
 | E-commerce Apps | `ecommerce-marketing-expert` | Conversion strategy, UX patterns, marketing features |
-| E-commerce Legal | `ecommerce-legal-expert` | Terms of service, GDPR, legal compliance, sole proprietorship obligations |
+| E-commerce Legal | `ecommerce-legal-expert` | Terms of service, GDPR, legal compliance |
+
+### Role-Based Agents (use `subagent_type="general-purpose"` with role prompt)
+
+| Plan Domain | Role Prompt Prefix | What to Get |
+|-------------|--------------------|-------------|
+| API Design | "You are a senior backend architect." | API structure, endpoints, error handling |
+| UI Components | "You are a senior frontend architect." | Component specs, accessibility requirements |
+| Architecture | "You are a system architect." | Architecture decisions, patterns to follow |
+| Testing | "You are a QA engineer." | Test strategy, edge cases, coverage requirements |
+| Security | "You are a security engineer." | Security requirements, validation rules |
+| Performance | "You are a performance engineer." | Performance targets, optimization strategies |
 
 **Planning Process**:
 1. Read the analysis.md
 2. Identify domains involved in the feature
-3. Launch appropriate agents to get detailed recommendations
-4. Incorporate their expertise into the implementation plan
+3. For native agents: launch with `subagent_type` directly
+4. For role-based agents: launch with `subagent_type="general-purpose"` and include the role prompt prefix
+5. Incorporate their expertise into the implementation plan
 
 ---
 

@@ -102,25 +102,32 @@ Output:
 
 ## Mandatory Agent Delegation for Implementation
 
-**CRITICAL**: Use specialized agents during implementation for quality code:
+**CRITICAL**: Use specialized agents during implementation for quality code.
 
-| Implementation Task | Agent to Use | Purpose |
-|---------------------|--------------|---------|
-| Backend Code | `backend-architect` | API implementation, database operations |
-| Frontend Code | `frontend-architect` | UI components, accessibility |
+### Native Agents (use directly as `subagent_type`)
+
+| Implementation Task | subagent_type | Purpose |
+|---------------------|---------------|---------|
 | Angular Code | `angular-expert` | Angular 21+ implementation, signals, standalone |
 | Next.js Code | `nextjs-expert` | Next.js 15+ implementation, Server Components |
-| Python Code | `python-expert` | Production-ready Python with tests |
-| Refactoring | `refactoring-expert` | Clean code, SOLID principles |
-| Security | `security-engineer` | Security validation, input sanitization |
 | E-commerce Code | `ecommerce-marketing-expert` | Cart, checkout, product pages, conversion elements |
-| Legal Compliance | `ecommerce-legal-expert` | Legal notices, terms of service, cookies, GDPR, compliance |
+| Legal Compliance | `ecommerce-legal-expert` | Legal notices, terms of service, cookies, GDPR |
+
+### Role-Based Agents (use `subagent_type="general-purpose"` with role prompt)
+
+| Implementation Task | Role Prompt Prefix | Purpose |
+|---------------------|--------------------|---------|
+| Backend Code | "You are a senior backend architect." | API implementation, database operations |
+| Frontend Code | "You are a senior frontend architect." | UI components, accessibility |
+| Python Code | "You are a Python expert." | Production-ready Python with tests |
+| Refactoring | "You are a refactoring expert." | Clean code, SOLID principles |
+| Security | "You are a security engineer." | Security validation, input sanitization |
 
 **During Implementation**:
 - For complex code sections, delegate to the appropriate specialist agent
 - Have agents review critical code paths
-- Use `quality-engineer` for test creation
-- Use `security-engineer` for security-sensitive code
+- Use `general-purpose` with "You are a QA engineer." for test creation
+- Use `general-purpose` with "You are a security engineer." for security-sensitive code
 
 ---
 

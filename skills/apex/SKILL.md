@@ -83,32 +83,42 @@ After implementation:
 
 ## Mandatory Agent Delegation
 
-**CRITICAL**: For each phase, you MUST delegate to the appropriate specialized agent(s) using the Task tool:
+**CRITICAL**: For each phase, you MUST delegate to the appropriate specialized agent(s) using the Task tool.
 
-| Domain | Agent to Use | When to Use |
-|--------|--------------|-------------|
-| Backend/API | `backend-architect` | API design, database, server-side logic |
-| Frontend/UI | `frontend-architect` | UI components, accessibility, responsive design |
+### Native Agents (use directly as `subagent_type`)
+
+| Domain | subagent_type | When to Use |
+|--------|---------------|-------------|
 | Angular | `angular-expert` | Angular 21+, signals, standalone components, control flow |
 | Next.js | `nextjs-expert` | Next.js 15+, App Router, Server Components, Server Actions |
-| Performance | `performance-engineer` | Optimization, bottlenecks, metrics |
-| Security | `security-engineer` | Vulnerability assessment, auth, compliance |
-| Testing | `quality-engineer` | Test strategy, edge cases, coverage |
-| Code Quality | `refactoring-expert` | Technical debt, SOLID principles, clean code |
-| System Design | `system-architect` | Architecture decisions, scalability |
-| DevOps | `devops-architect` | CI/CD, deployment, infrastructure |
-| Python | `python-expert` | Python-specific implementation |
-| Documentation | `technical-writer` | API docs, user guides, specifications |
-| Requirements | `requirements-analyst` | PRD, user stories, scope definition |
-| Debugging | `root-cause-analyst` | Complex debugging, investigation |
 | E-commerce | `ecommerce-marketing-expert` | Conversion, UX, marketing, payments, SEO |
-| E-commerce Legal | `ecommerce-legal-expert` | Terms of service, GDPR, legal notices, sole proprietorship, compliance |
+| E-commerce Legal | `ecommerce-legal-expert` | Terms of service, GDPR, legal notices, compliance |
+
+### Role-Based Agents (use `subagent_type="general-purpose"` with role prompt)
+
+For these domains, use `general-purpose` and start the Task prompt with the role description:
+
+| Domain | Role Prompt Prefix | Focus |
+|--------|--------------------|-------|
+| Backend/API | "You are a senior backend architect." | API design, database, server-side logic |
+| Frontend/UI | "You are a senior frontend architect." | UI components, accessibility, responsive design |
+| Security | "You are a security engineer." | Vulnerability assessment, auth, compliance |
+| Performance | "You are a performance engineer." | Optimization, bottlenecks, metrics |
+| Testing | "You are a QA engineer." | Test strategy, edge cases, coverage |
+| Code Quality | "You are a refactoring expert." | Technical debt, SOLID principles, clean code |
+| System Design | "You are a system architect." | Architecture decisions, scalability |
+| DevOps | "You are a DevOps engineer." | CI/CD, deployment, infrastructure |
+| Python | "You are a Python expert." | Python-specific implementation |
+| Documentation | "You are a technical writer." | API docs, user guides, specifications |
+| Requirements | "You are a requirements analyst." | PRD, user stories, scope definition |
+| Debugging | "You are a root cause analyst." | Complex debugging, investigation |
 
 **Delegation Process**:
 1. Identify which domains the feature touches
-2. Launch appropriate agent(s) using Task tool with `subagent_type` parameter
-3. Integrate their outputs into your analysis/plan
-4. For complex features, use multiple agents in parallel
+2. For native agents: launch with `subagent_type` directly
+3. For role-based agents: launch with `subagent_type="general-purpose"` and include the role prompt prefix
+4. Integrate their outputs into your analysis/plan
+5. For complex features, use multiple agents in parallel
 
 ---
 
